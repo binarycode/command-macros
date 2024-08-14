@@ -768,8 +768,8 @@ impl Parser {
 }
 
 fn are_separated_spans(left: Span, right: Span) -> bool {
-    left.end().line != right.start().line ||
-    left.end().column < right.start().column
+    left.end().line() != right.start().line() ||
+    left.end().column() < right.start().column()
 }
 
 fn is_separated_span(left: Option<Span>, this: Span, right: Option<Span>) -> bool {
@@ -781,7 +781,7 @@ fn is_really_empty(group: &Group) -> bool {
     let span = group.span();
     let start = span.start();
     let end = span.end();
-    group.stream().is_empty() && start.line == end.line && start.column + 2 == end.column
+    group.stream().is_empty() && start.line() == end.line() && start.column() + 2 == end.column()
 }
 
 fn try_into_singleton(stream: &TokenStream) -> Option<TokenTree> {
